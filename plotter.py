@@ -1,3 +1,4 @@
+# plot_bestfit is a method previously defined within the lc_fitter class.
 def plot_bestfit(self, nbins=10, phase=True, title=""):
 
     f, (ax_lc, ax_res) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [3, 1]})
