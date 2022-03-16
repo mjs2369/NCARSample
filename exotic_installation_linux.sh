@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+git clone https://github.com/rzellem/exotic.git
+
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get -y update && sudo apt-get -y upgrade
