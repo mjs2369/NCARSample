@@ -1,4 +1,4 @@
-# plot_bestfit is a method previously defined within the lc_fitter class.
+# plot_bestfit is defined within the lc_fitter class.
 def plot_bestfit(self, nbins=10, phase=True, title=""):
 
     f, (ax_lc, ax_res) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [3, 1]})
@@ -43,9 +43,10 @@ def plot_bestfit(self, nbins=10, phase=True, title=""):
 
     correctedSTD = np.std(self.residuals / np.median(self.data))
     
-    # plotting the final lightcurve model 
     ax_lc.errorbar(ecks, self.detrended, yerr=self.detrendederr, ls='none',
                    marker='o', color='gray', markersize=5, mec='None', alpha=0.75)
+    
+    # plotting the final lightcurve model calculated in transit() method that also belongs to the lc_fitter class.
     ax_lc.plot(ecks, self.transit, 'r', zorder=1000, lw=2)
 
     ax_lc.set_ylabel('Relative Flux')
@@ -71,8 +72,3 @@ def plot_bestfit(self, nbins=10, phase=True, title=""):
     f.subplots_adjust(hspace=0)
 
     return f,(ax_lc, ax_res)
-
-def plot_triangle(self):
-    fig,axs = dynesty.plotting.cornerplot(self.results, labels=list(self.bounds.keys()), quantiles_2d=[0.4,0.85], smooth=0.015, show_titles=True,use_math_text=True, title_fmt='.2e',hist2d_kwargs={'alpha':1,'zorder':2,'fill_contours':False})
-    dynesty.plotting.cornerpoints(self.results, labels=list(self.bounds.keys()), fig=[fig,axs[1:,:-1]],plot_kwargs={'alpha':0.1,'zorder':1,} )
-    return fig, axs
