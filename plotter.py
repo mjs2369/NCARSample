@@ -49,6 +49,8 @@ def plot_bestfit(self, nbins=10, phase=True, title=""):
     ax_lc.set_ylabel('Relative Flux')
     ax_lc.get_xaxis().set_visible(False)
 
+   ## binner() is a method previously defined in EXOTIC - condenses 10 pixels into 1
+   ## reduces the runtime of imaging processing 
     ax_res.errorbar(binner(ecks, len(self.residuals) // 10),
                     binner(self.residuals / np.median(self.data), len(self.residuals) // 10),
                     yerr=
