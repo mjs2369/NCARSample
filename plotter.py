@@ -42,6 +42,8 @@ def plot_bestfit(self, nbins=10, phase=True, title=""):
                      3 * np.nanstd(self.residuals / np.median(self.data))])
 
     correctedSTD = np.std(self.residuals / np.median(self.data))
+    
+    # plotting the final lightcurve model 
     ax_lc.errorbar(ecks, self.detrended, yerr=self.detrendederr, ls='none',
                    marker='o', color='gray', markersize=5, mec='None', alpha=0.75)
     ax_lc.plot(ecks, self.transit, 'r', zorder=1000, lw=2)
@@ -49,9 +51,9 @@ def plot_bestfit(self, nbins=10, phase=True, title=""):
     ax_lc.set_ylabel('Relative Flux')
     ax_lc.get_xaxis().set_visible(False)
 
-   ## binner() is a method previously defined in EXOTIC - condenses 10 pixels into 1
-   ## reduces the runtime of imaging processing 
-   ## increases signal to noise ratio at each pixel by reducing the statistical significance of error values 
+    # binner() is a method previously defined in EXOTIC - condenses 10 pixels into 1
+    # reduces size of dataset to imporove plot legibility and reduce analysis runtime
+    # increases signal to noise ratio at each data point by reducing the statistical significance of error values 
     ax_res.errorbar(binner(ecks, len(self.residuals) // 10),
                     binner(self.residuals / np.median(self.data), len(self.residuals) // 10),
                     yerr=
