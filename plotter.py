@@ -40,11 +40,6 @@ def plot_bestfit(self, nbins=10, phase=True, title=""):
     ax_res.set_ylabel('Residuals')
     ax_res.set_ylim([-3 * np.nanstd(self.residuals / np.median(self.data)),
                      3 * np.nanstd(self.residuals / np.median(self.data))])
-
-    correctedSTD = np.std(self.residuals / np.median(self.data))
-    
-    ax_lc.errorbar(ecks, self.detrended, yerr=self.detrendederr, ls='none',
-                   marker='o', color='gray', markersize=5, mec='None', alpha=0.75)
     
     # plotting the final lightcurve model calculated in transit() method that also belongs to the lc_fitter class.
     ax_lc.plot(ecks, self.transit, 'r', zorder=1000, lw=2)
@@ -53,7 +48,7 @@ def plot_bestfit(self, nbins=10, phase=True, title=""):
     ax_lc.get_xaxis().set_visible(False)
 
     # binner() is a method previously defined in EXOTIC - condenses multiple data points into one
-    # reduces size of dataset to imporove plot legibility and reduce analysis runtime
+    # reduces size of dataset to imporove plot legibility and reduce runtime
     # increases signal to noise ratio at each data point by reducing the statistical significance of error values 
     ax_res.errorbar(binner(ecks, len(self.residuals) // 10),
                     binner(self.residuals / np.median(self.data), len(self.residuals) // 10),
